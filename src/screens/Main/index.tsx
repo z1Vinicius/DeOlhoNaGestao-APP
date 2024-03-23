@@ -1,34 +1,22 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { SvgXml } from "react-native-svg";
-import { useEffect, useState } from "react";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import AppLogo from "../../../assets/logo/logo.png";
 import MessageIcon from "../../../assets/icons/message.svg";
 
-import { AntDesign, Ionicons } from "@expo/vector-icons";
-import stringPhrases from "../../data/messages";
+import { AntDesign } from "@expo/vector-icons";
 const Logo = Image.resolveAssetSource(AppLogo).uri;
-import { randomTwoPhrases } from "../../utils/functions";
 
 import { useNavigation } from "@react-navigation/native";
 import { AuthStackRoutes } from "../../interfaces/routes";
 
+import MainAuthViewModel from "./view.model";
+
 function HomeView() {
-	const [phrases, setPhrases] = useState<string[]>([]);
 	const navigator = useNavigation<NativeStackNavigationProp<AuthStackRoutes>>();
-
-	useEffect(() => {
-		const interval = setInterval(() => {
-			const randomPhrases = randomTwoPhrases(stringPhrases);
-			setPhrases(randomPhrases);
-		}, 5000);
-
-		return () => {
-			clearInterval(interval);
-		};
-	}, []);
+	const { phrases } = MainAuthViewModel();
 
 	return (
 		<View className="justify-center items-center">
