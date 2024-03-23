@@ -1,15 +1,30 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { SvgXml } from "react-native-svg";
+import { useEffect, useState } from "react";
 
 import AppLogo from "../../../assets/logo/logo.png";
 import MessageIcon from "../../../assets/icons/message.svg";
 
 import { AntDesign, Ionicons } from "@expo/vector-icons";
-
+import stringPhrases from "../../data/messsages";
 const Logo = Image.resolveAssetSource(AppLogo).uri;
+import { randomTwoPhrases } from "../../utils/functions";
 
 function HomeView() {
+	const [phrases, setPhrases] = useState<string[]>([]);
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			const randomPhrases = randomTwoPhrases(stringPhrases);
+			setPhrases(randomPhrases);
+		}, 5000);
+
+		return () => {
+			clearInterval(interval);
+		};
+	}, []);
+
 	return (
 		<View className="justify-center items-center">
 			<View className="p-2 w-full h-3/6">
@@ -21,13 +36,13 @@ function HomeView() {
 					<Text className="font-bold text-4xl">DE OLHO NA GESTÃO</Text>
 				</View>
 
-				<View className="w-full">
+				<View className="w-5/6 h-40 justify-center items-center m-1">
 					<View className="w-full flex-row items-center justify-start">
 						<SvgXml className="m-3" width="35px" height="35px" xml={MessageIcon} />
-						<Text className="text-gray-500 text-lg">Falta de Acessibilidade na rua....</Text>
+						<Text className="text-gray-500 text-lg break-words">{phrases[0]}</Text>
 					</View>
-					<View className="w-full flex-row items-center justify-end">
-						<Text className="text-gray-500 text-lg">Falta de Acessibilidade na rua....</Text>
+					<View className="w-full flex-row items-center ">
+						<Text className="text-gray-500 text-lg text-nowrap ">{phrases[1]}</Text>
 						<SvgXml className="m-3" width="35px" height="35px" xml={MessageIcon} />
 					</View>
 				</View>
