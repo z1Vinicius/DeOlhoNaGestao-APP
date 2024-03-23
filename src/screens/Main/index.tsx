@@ -2,17 +2,22 @@ import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { SvgXml } from "react-native-svg";
 import { useEffect, useState } from "react";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import AppLogo from "../../../assets/logo/logo.png";
 import MessageIcon from "../../../assets/icons/message.svg";
 
 import { AntDesign, Ionicons } from "@expo/vector-icons";
-import stringPhrases from "../../data/messsages";
+import stringPhrases from "../../data/messages";
 const Logo = Image.resolveAssetSource(AppLogo).uri;
 import { randomTwoPhrases } from "../../utils/functions";
 
+import { useNavigation } from "@react-navigation/native";
+import { AuthStackRoutes } from "../../interfaces/routes";
+
 function HomeView() {
 	const [phrases, setPhrases] = useState<string[]>([]);
+	const navigator = useNavigation<NativeStackNavigationProp<AuthStackRoutes>>();
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -48,7 +53,13 @@ function HomeView() {
 				</View>
 
 				<View className="m-3 space-y-2">
-					<TouchableOpacity className="bg-[#00aeed] h-12 rounded-xl p-2 justify-center items-center" activeOpacity={0.9}>
+					<TouchableOpacity
+						onPress={() => {
+							navigator.navigate("Login");
+						}}
+						className="bg-[#00aeed] h-12 rounded-xl p-2 justify-center items-center"
+						activeOpacity={0.9}
+					>
 						<View className="w-full h-full flex-row justify-between items-center">
 							<View />
 							<Text className="text-slate-50 text-lg font-medium">Login</Text>
