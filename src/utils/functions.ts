@@ -6,3 +6,5 @@ export function randomTwoPhrases(phrases: string[]) {
 	}
 	return [phrases[index1], phrases[index2]];
 }
+
+export const sleep = (ms) => new Promise((res) => setTimeout(res, ms));

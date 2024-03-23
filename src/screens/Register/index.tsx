@@ -66,7 +66,7 @@ function LoginView() {
 			</Container>
 
 			{!isKeyboardOpen ? (
-				<Container className="absolute bottom-0 bg-gray-200 h-12 w-full flex-row p-3 justify-center items-center space-x-2 m-3 ">
+				<Container className="absolute bottom-0 bg-gray-200 h-12 w-full flex-row p-3 justify-center items-center space-x-2 mb-3 ">
 					<Text className="text-zinc-700 ">Já possuí uma conta?</Text>
 					<Button
 						activeOpacity={0.8}
