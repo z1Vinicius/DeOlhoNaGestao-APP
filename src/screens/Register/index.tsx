@@ -10,10 +10,11 @@ import { useNavigation } from "@react-navigation/native";
 import { AuthStackRoutes } from "../../interfaces/routes";
 import useKeyboardOpen from "../../hooks/keyboard";
 import HeaderBack from "../../components/HeaderBack";
-import { Dropdown } from "react-native-searchable-dropdown-kj";
+import RegisterViewModel from "./view.model";
 
-function LoginView() {
+function RegisterView() {
 	const navigator = useNavigation<NativeStackNavigationProp<AuthStackRoutes>>();
+	const { register, setValue, onSubmit, handleSubmit, errors } = RegisterViewModel();
 	const isKeyboardOpen = useKeyboardOpen();
 	const city = [
 		{
@@ -34,11 +35,35 @@ function LoginView() {
 			</Container>
 			<Container className="w-full p-2 justify-center items-center ">
 				<Container className="w-full p-3 space-y-2">
-					<Input className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-3 text-gray-600" placeholder="Usuário" />
-					<Input className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-3 text-gray-600" placeholder="Nome Completo" />
-					<Input className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-3 text-gray-600" placeholder="E-mail" />
-					<Input className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-3 text-gray-600" secureTextEntry={true} placeholder="Senha" />
-					<Input className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-3 text-gray-600" secureTextEntry={true} placeholder="Confirmar Senha" />
+					<Input
+						className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-3 text-gray-600"
+						placeholder="Usuário"
+						onChangeText={(text) => {
+							setValue("username", text);
+						}}
+					/>
+					<Input
+						className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-3 text-gray-600"
+						placeholder="Nome Completo"
+						onChangeText={(text) => setValue("fullName", text)}
+					/>
+					<Input
+						className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-3 text-gray-600"
+						placeholder="E-mail"
+						onChangeText={(text) => setValue("email", text)}
+					/>
+					<Input
+						className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-3 text-gray-600"
+						secureTextEntry={true}
+						placeholder="Senha"
+						onChangeText={(text) => setValue("password", text)}
+					/>
+					<Input
+						className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-3 text-gray-600"
+						secureTextEntry={true}
+						placeholder="Confirmar Senha"
+						onChangeText={(text) => setValue("confirmPassword", text)}
+					/>
 					{/* <Dropdown
 						style={[SelectSearch.dropdown]}
 						containerStyle={{ bottom: 35, borderRadius: 10 }}
@@ -58,8 +83,8 @@ function LoginView() {
 						onChange={() => console.log("Mudou")}
 					/> */}
 					<Container className="w-full">
-						<Button className="bg-[#1aace4] h-12 w-full p-2 justify-center items-center rounded-xl">
-							<Text className="text-slate-50 ">Registrar</Text>
+						<Button activeOpacity={0.8} onPress={handleSubmit(onSubmit)} className="bg-[#1aace4] h-12 w-full p-2 justify-center items-center rounded-xl">
+							<Text className="text-slate-50">Registrar</Text>
 						</Button>
 					</Container>
 				</Container>
@@ -83,7 +108,7 @@ function LoginView() {
 		</Container>
 	);
 }
-export default LoginView;
+export default RegisterView;
 
 export const SelectSearch = StyleSheet.create({
 	container: {

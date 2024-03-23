@@ -15,6 +15,7 @@
     "@gluestack-ui/config": "^1.0.10",
     "@gluestack-ui/themed": "^1.1.17",
     "@gluestack/ui-next-adapter": "^2.1.10",
+    "@hookform/resolvers": "^3.3.4",
     "@nozbe/watermelondb": "^0.27.1",
     "@react-native-community/cli-doctor": "^13.2.0",
     "@react-native-community/cli-platform-android": "^13.2.0",
@@ -50,6 +51,7 @@
     "react": "18.2.0",
     "react-devtools": "^5.0.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.51.1",
     "react-native": "0.72.6",
     "react-native-actions-sheet": "^0.9.0-alpha.24",
     "react-native-bouncing-preloaders": "^1.0.0",
@@ -82,6 +84,7 @@
     "tailwindcss-react-native": "^1.7.10",
     "toastify-react-native": "^5.0.0",
     "uuid": "^9.0.1",
+    "yup": "^1.4.0",
     "zustand": "^4.4.7"
   },
   "devDependencies": {
