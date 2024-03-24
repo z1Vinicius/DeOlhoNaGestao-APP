@@ -2,6 +2,8 @@ import React from "react";
 
 import { Text, Image, ActivityIndicator as Loader, View as Container, TextInput as Input, TouchableOpacity as Button, KeyboardAvoidingView as ContainerAvoid } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { Controller } from "react-hook-form";
+import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 
 import AppLogo from "../../../assets/logo/logo.png";
 const Logo = Image.resolveAssetSource(AppLogo).uri;
@@ -10,13 +12,12 @@ import HeaderBack from "../../components/HeaderBack";
 import { useNavigation } from "@react-navigation/native";
 import { AuthStackRoutes } from "../../interfaces/routes";
 import useKeyboardOpen from "../../hooks/keyboard";
-import { AntDesign } from "@expo/vector-icons";
 
 import LoginViewModel from "./view.model";
 
 function LoginView() {
 	const navigator = useNavigation<NativeStackNavigationProp<AuthStackRoutes>>();
-	const { password, setPassword, username, setUsername, isLoading, handleLogin } = LoginViewModel();
+	const { handleSubmit, control, onSubmit, loading } = LoginViewModel();
 	const isKeyboardOpen = useKeyboardOpen();
 
 	return (
@@ -29,43 +30,70 @@ function LoginView() {
 				</Container>
 
 				<Container className="w-full p-3 space-y-2">
-					<Input
-						className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-2 text-gray-600"
-						placeholder="Usuário"
-						value={username}
-						onChangeText={setUsername}
-						placeholderTextColor={"#4f4f53"}
-						// autoFocus={true}
-						secureTextEntry={true}
-					/>
-					<Input
-						className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-2 text-gray-600"
-						placeholder="Senha"
-						value={password}
-						onChangeText={setPassword}
-						placeholderTextColor={"#4f4f53"}
-						secureTextEntry={true}
-					/>
+					<Container>
+						<Controller
+							control={control}
+							name={"username"}
+							render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
+								<>
+									{error && (
+										<Animated.View className="w-full" entering={FadeIn} exiting={FadeOut}>
+											<Text className="text-red-500 text-start">{error.message}</Text>
+										</Animated.View>
+									)}
+									<Input
+										placeholder="Usuário"
+										className="w-full h-12 rounded-2xl border-solid border-gray-500/30 border-2 p-2 text-gray-600"
+										value={value}
+										onChangeText={onChange}
+										onBlur={onBlur}
+									/>
+								</>
+							)}
+						/>
+					</Container>
 
 					<Container>
-						<Button
-							activeOpacity={0.8}
-							disabled={isLoading}
-							onPress={async () => {
-								await handleLogin();
-							}}
-							className="bg-[#1aace4] h-12 w-full p-2 justify-center items-center rounded-xl flex-row"
-						>
-							{isLoading ? <Loader size="small" color="#FFF" className="mr-2" /> : ""}
-							<Text className="text-slate-50 ">Entrar</Text>
-						</Button>
+						<Controller
+							control={control}
+							name={"password"}
+							render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
+								<>
+									{error && (
+										<Animated.View className="w-full" entering={FadeIn} exiting={FadeOut}>
+											<Text className="text-red-500 text-start">{error.message}</Text>
+										</Animated.View>
+									)}
+									<Input
+										placeholder="Senha"
+										className="w-full h-12 rounded-2xl border-solid border-gray-500/30 border-2 p-2 text-gray-600"
+										value={value}
+										onChangeText={onChange}
+										onBlur={onBlur}
+									/>
+								</>
+							)}
+						/>
 					</Container>
-					<Container className="w-full justify-center flex-row p-3">
-						<Text className="text-zinc-800  font-semibold">Esqueceu sua senha?</Text>
+
+					<Container className="w-full p-3 space-y-2">
+						<Container>
+							<Button
+								activeOpacity={0.8}
+								disabled={loading}
+								onPress={handleSubmit(onSubmit)}
+								className="bg-[#1aace4] h-12 w-full p-2 justify-center items-center rounded-xl flex-row"
+							>
+								{loading ? <Loader size="small" color="#FFF" className="mr-2" /> : ""}
+								<Text className="text-slate-50 ">Entrar</Text>
+							</Button>
+						</Container>
+						<Container className="w-full justify-center flex-row p-3">
+							<Text className="text-zinc-800  font-semibold">Esqueceu sua senha?</Text>
+						</Container>
 					</Container>
 				</Container>
 			</Container>
-
 			{!isKeyboardOpen ? (
 				<Container className=" bottom-0 bg-gray-200 h-12 w-full flex-row p-3 justify-center items-center space-x-2 m-3 ">
 					<Text className="text-zinc-700 ">Não tem uma conta?</Text>

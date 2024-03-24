@@ -1,24 +1,32 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Alert } from "react-native";
+import { LoginValidationSchema } from "../../validators/auth";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { sleep } from "../../utils/functions";
 
 function LoginViewModel() {
-	const [username, setUsername] = useState<string>("");
-	const [password, setPassword] = useState<string>("");
-	const [isLoading, setLoading] = useState<boolean>(false);
+	const [loading, setLoading] = useState<boolean>(false);
+	const { control, handleSubmit } = useForm({
+		defaultValues: {
+			username: "",
+			password: "",
+		},
+		resolver: zodResolver(LoginValidationSchema),
+	});
 
-	const handleLogin = async () => {
+	const onSubmit = async (data) => {
 		setLoading(true);
 		await sleep(2000);
+		Alert.alert("Successful", JSON.stringify(data));
 		setLoading(false);
 	};
 
 	return {
-		username,
-		password,
-		setUsername,
-		setPassword,
-		isLoading,
-		handleLogin,
+		loading,
+		control,
+		onSubmit,
+		handleSubmit,
 	};
 }
 
