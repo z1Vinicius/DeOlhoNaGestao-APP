@@ -11,7 +11,7 @@ import { AuthStackRoutes } from "../../interfaces/routes";
 import useKeyboardOpen from "../../hooks/keyboard";
 import HeaderBack from "../../components/HeaderBack";
 import RegisterViewModel from "./view.model";
-import { zodResolver } from "@hookform/resolvers/zod";
+import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 
 function RegisterView() {
 	const navigator = useNavigation<NativeStackNavigationProp<AuthStackRoutes>>();
@@ -43,9 +43,9 @@ function RegisterView() {
 							render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
 								<>
 									{error && (
-										<Container className="w-full">
+										<Animated.View className="w-full" entering={FadeIn} exiting={FadeOut}>
 											<Text className="text-red-500 text-start">{error.message}</Text>
-										</Container>
+										</Animated.View>
 									)}
 									<Input
 										placeholder="Usuário"
@@ -66,9 +66,9 @@ function RegisterView() {
 							render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
 								<>
 									{error && (
-										<Container className="w-full">
+										<Animated.View className="w-full" entering={FadeIn} exiting={FadeOut}>
 											<Text className="text-red-500 text-start">{error.message}</Text>
-										</Container>
+										</Animated.View>
 									)}
 									<Input
 										placeholder="Nome Completo"
@@ -89,9 +89,9 @@ function RegisterView() {
 							render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
 								<>
 									{error && (
-										<Container className="w-full">
+										<Animated.View className="w-full" entering={FadeIn} exiting={FadeOut}>
 											<Text className="text-red-500 text-start">{error.message}</Text>
-										</Container>
+										</Animated.View>
 									)}
 									<Input
 										placeholder="Email"
@@ -111,9 +111,9 @@ function RegisterView() {
 							render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
 								<>
 									{error && (
-										<Container className="w-full">
+										<Animated.View className="w-full" entering={FadeIn} exiting={FadeOut}>
 											<Text className="text-red-500 text-start">{error.message}</Text>
-										</Container>
+										</Animated.View>
 									)}
 									<Input
 										placeholder="Senha"
@@ -134,9 +134,9 @@ function RegisterView() {
 							render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
 								<>
 									{error && (
-										<Container className="w-full">
+										<Animated.View className="w-full" entering={FadeIn} exiting={FadeOut}>
 											<Text className="text-red-500 text-start">{error.message}</Text>
-										</Container>
+										</Animated.View>
 									)}
 									<Input
 										placeholder="Confirmar senha"
@@ -157,9 +157,9 @@ function RegisterView() {
 							render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
 								<>
 									{error && (
-										<Container className="w-full">
+										<Animated.View className="w-full" entering={FadeIn} exiting={FadeOut}>
 											<Text className="text-red-500 text-start">{error.message}</Text>
-										</Container>
+										</Animated.View>
 									)}
 									<Input
 										placeholder="Recife (Pernambuco)"
@@ -172,25 +172,6 @@ function RegisterView() {
 							)}
 						/>
 					</Container>
-
-					{/* <Dropdown
-						style={[SelectSearch.dropdown]}
-						containerStyle={{ bottom: 35, borderRadius: 10 }}
-						placeholderStyle={SelectSearch.placeholderStyle}
-						selectedTextStyle={SelectSearch.selectedTextStyle}
-						inputSearchStyle={SelectSearch.inputSearchStyle}
-						data={city.map((option) => ({ label: `${option.label}`, value: option.id, color: "#000" }))}
-						search
-						// disable={!params.enableEdit}
-						labelField="label"
-						valueField="value"
-						// placeholder={!isFocus ? "Selecione o sistema..." : "..."}
-						searchPlaceholder="Pesquisar..."
-						// value={selectedValue}
-						// onFocus={() => setIsFocus(true)}
-						// onBlur={() => setIsFocus(false)}
-						onChange={() => console.log("Mudou")}
-					/> */}
 					<Container className="w-full">
 						<Button activeOpacity={0.8} onPress={handleSubmit(onSubmit)} className="bg-[#1aace4] h-12 w-full p-2 justify-center items-center rounded-xl">
 							<Text className="text-slate-50">Registrar</Text>
