@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { GluestackUIProvider } from "@gluestack-ui/themed";
 import { config } from "@gluestack-ui/config";
 import Toast from "react-native-toast-message";
+import CustomToastConfig from "./src/styles/toast";
 
 import "react-native-gesture-handler";
 import "react-native-get-random-values";
@@ -18,7 +19,7 @@ function App() {
 				<StatusBar hidden={true}></StatusBar>
 				<Routes />
 			</NavigationContainer>
-			<Toast />
+			<Toast config={CustomToastConfig as any} />
 		</GluestackUIProvider>
 	);
 }

@@ -31,9 +31,27 @@ function LoginViewModel() {
 			await database.localStorage.set("auth.access", data.access);
 			await database.localStorage.set("auth.refresh", data.refresh);
 			Toast.show({
-				type: "success",
+				type: "showSuccess",
 				text1: "Logado com sucesso",
 				text2: "Bem vindo! 👋",
+				position: "bottom",
+			});
+		}
+
+		if (authEntity.status === 500) {
+			Toast.show({
+				type: "showConnection",
+				text1: "Sem conexão",
+				text2: "Não foi possível autenticar devido a um problema de conexão! 🙁",
+				position: "bottom",
+			});
+		}
+
+		if (authEntity.status === 401) {
+			Toast.show({
+				type: "showError",
+				text1: "Credenciais incorretas",
+				text2: "❌ Não foi possível autenticar devido a credenciais incorretas! ",
 				position: "bottom",
 			});
 		}
