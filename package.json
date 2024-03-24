@@ -85,7 +85,6 @@
     "tailwindcss-react-native": "^1.7.10",
     "toastify-react-native": "^5.0.0",
     "uuid": "^9.0.1",
-    "yup": "^1.4.0",
     "zod": "^3.22.4",
     "zustand": "^4.4.7"
   },
