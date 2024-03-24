@@ -1,30 +1,28 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Alert } from "react-native";
 import { RegisterValidationSchema } from "../../validators/auth";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 function RegisterViewModel() {
-	const {
-		register,
-		setValue,
-		handleSubmit,
-		formState: { errors, isValid },
-	} = useForm({ resolver: yupResolver(RegisterValidationSchema) });
-	const onSubmit = (data) => Alert.alert(data.username);
+	const { control, handleSubmit } = useForm({
+		defaultValues: {
+			email: "",
+			username: "",
+			fullName: "",
+			password: "",
+			confirmPassword: "",
+			city: "",
+		},
+		resolver: zodResolver(RegisterValidationSchema),
+	});
 
-	useEffect(() => {
-		register("username");
-		register("fullName");
-		register("email");
-		register("password");
-		register("confirmPassword");
-	}, [register]);
+	const onSubmit = (data) => {
+		Alert.alert("Successful", JSON.stringify(data));
+	};
 
 	return {
-		register,
-		errors,
-		setValue,
+		control,
 		onSubmit,
 		handleSubmit,
 	};

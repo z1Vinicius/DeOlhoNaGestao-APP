@@ -1,6 +1,6 @@
 import React from "react";
-
-import { Text, Image, View as Container, TextInput as Input, TouchableOpacity as Button, ViewStyle, StyleSheet } from "react-native";
+import { Controller } from "react-hook-form";
+import { Text, Image, View as Container, TextInput as Input, TouchableOpacity as Button, ScrollView, StyleSheet } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import AppLogo from "../../../assets/logo/logo.png";
@@ -11,10 +11,11 @@ import { AuthStackRoutes } from "../../interfaces/routes";
 import useKeyboardOpen from "../../hooks/keyboard";
 import HeaderBack from "../../components/HeaderBack";
 import RegisterViewModel from "./view.model";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 function RegisterView() {
 	const navigator = useNavigation<NativeStackNavigationProp<AuthStackRoutes>>();
-	const { register, setValue, onSubmit, handleSubmit, errors } = RegisterViewModel();
+	const { control, onSubmit, handleSubmit } = RegisterViewModel();
 	const isKeyboardOpen = useKeyboardOpen();
 	const city = [
 		{
@@ -34,36 +35,144 @@ function RegisterView() {
 				</Container>
 			</Container>
 			<Container className="w-full p-2 justify-center items-center ">
-				<Container className="w-full p-3 space-y-2">
-					<Input
-						className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-3 text-gray-600"
-						placeholder="Usuário"
-						onChangeText={(text) => {
-							setValue("username", text);
-						}}
-					/>
-					<Input
-						className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-3 text-gray-600"
-						placeholder="Nome Completo"
-						onChangeText={(text) => setValue("fullName", text)}
-					/>
-					<Input
-						className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-3 text-gray-600"
-						placeholder="E-mail"
-						onChangeText={(text) => setValue("email", text)}
-					/>
-					<Input
-						className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-3 text-gray-600"
-						secureTextEntry={true}
-						placeholder="Senha"
-						onChangeText={(text) => setValue("password", text)}
-					/>
-					<Input
-						className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-3 text-gray-600"
-						secureTextEntry={true}
-						placeholder="Confirmar Senha"
-						onChangeText={(text) => setValue("confirmPassword", text)}
-					/>
+				<ScrollView className="w-full p-3 space-y-2">
+					<Container>
+						<Controller
+							control={control}
+							name={"username"}
+							render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
+								<>
+									{error && (
+										<Container className="w-full">
+											<Text className="text-red-500 text-start">{error.message}</Text>
+										</Container>
+									)}
+									<Input
+										placeholder="Usuário"
+										className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-3 text-gray-600"
+										value={value}
+										onChangeText={onChange}
+										onBlur={onBlur}
+									/>
+								</>
+							)}
+						/>
+					</Container>
+
+					<Container>
+						<Controller
+							control={control}
+							name={"fullName"}
+							render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
+								<>
+									{error && (
+										<Container className="w-full">
+											<Text className="text-red-500 text-start">{error.message}</Text>
+										</Container>
+									)}
+									<Input
+										placeholder="Nome Completo"
+										className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-3 text-gray-600"
+										value={value}
+										onChangeText={onChange}
+										onBlur={onBlur}
+									/>
+								</>
+							)}
+						/>
+					</Container>
+
+					<Container>
+						<Controller
+							control={control}
+							name={"email"}
+							render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
+								<>
+									{error && (
+										<Container className="w-full">
+											<Text className="text-red-500 text-start">{error.message}</Text>
+										</Container>
+									)}
+									<Input
+										placeholder="Email"
+										className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-3 text-gray-600"
+										value={value}
+										onChangeText={onChange}
+										onBlur={onBlur}
+									/>
+								</>
+							)}
+						/>
+					</Container>
+					<Container>
+						<Controller
+							control={control}
+							name={"password"}
+							render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
+								<>
+									{error && (
+										<Container className="w-full">
+											<Text className="text-red-500 text-start">{error.message}</Text>
+										</Container>
+									)}
+									<Input
+										placeholder="Senha"
+										className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-3 text-gray-600"
+										value={value}
+										onChangeText={onChange}
+										onBlur={onBlur}
+									/>
+								</>
+							)}
+						/>
+					</Container>
+
+					<Container>
+						<Controller
+							control={control}
+							name={"confirmPassword"}
+							render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
+								<>
+									{error && (
+										<Container className="w-full">
+											<Text className="text-red-500 text-start">{error.message}</Text>
+										</Container>
+									)}
+									<Input
+										placeholder="Confirmar senha"
+										className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-3 text-gray-600"
+										value={value}
+										onChangeText={onChange}
+										onBlur={onBlur}
+									/>
+								</>
+							)}
+						/>
+					</Container>
+
+					<Container>
+						<Controller
+							control={control}
+							name={"city"}
+							render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
+								<>
+									{error && (
+										<Container className="w-full">
+											<Text className="text-red-500 text-start">{error.message}</Text>
+										</Container>
+									)}
+									<Input
+										placeholder="Recife (Pernambuco)"
+										className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-3 text-gray-600"
+										value={value}
+										onChangeText={onChange}
+										onBlur={onBlur}
+									/>
+								</>
+							)}
+						/>
+					</Container>
+
 					{/* <Dropdown
 						style={[SelectSearch.dropdown]}
 						containerStyle={{ bottom: 35, borderRadius: 10 }}
@@ -87,7 +196,7 @@ function RegisterView() {
 							<Text className="text-slate-50">Registrar</Text>
 						</Button>
 					</Container>
-				</Container>
+				</ScrollView>
 			</Container>
 
 			{!isKeyboardOpen ? (
