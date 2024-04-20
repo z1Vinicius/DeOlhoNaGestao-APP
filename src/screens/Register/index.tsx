@@ -50,7 +50,7 @@ function RegisterView() {
 									)}
 									<Input
 										placeholder="Usuário"
-										className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-3 text-gray-600"
+										className="w-full h-12 rounded-2xl border-solid border-gray-500/30 border-2 p-3 text-gray-600"
 										value={value}
 										onChangeText={onChange}
 										onBlur={onBlur}
@@ -119,7 +119,7 @@ function RegisterView() {
 									<Container className="flex-row w-full h-12 rounded-2xl border-solid border-gray-500/30 border-2 justify-between items-center p-2">
 										<Input
 											placeholder="Senha"
-											className="w-4/5 h-12 p-3 text-gray-600"
+											className="w-4/5 h-12 text-gray-600"
 											secureTextEntry={showPassword.password}
 											value={value}
 											onChangeText={onChange}
@@ -152,7 +152,7 @@ function RegisterView() {
 									<Container className="flex-row w-full h-12 rounded-2xl border-solid border-gray-500/30 border-2 justify-between items-center p-2">
 										<Input
 											placeholder="Confirmar senha"
-											className="w-4/5 h-12 p-3 text-gray-600"
+											className="w-4/5 h-12 text-gray-600"
 											secureTextEntry={showPassword.confirmPassword}
 											value={value}
 											onChangeText={onChange}
