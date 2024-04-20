@@ -1,0 +1,1 @@
+npx expo prebuild --clean & npx react-native run-android --mode=release

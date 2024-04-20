@@ -12,10 +12,11 @@ import useKeyboardOpen from "../../hooks/keyboard";
 import HeaderBack from "../../components/HeaderBack";
 import RegisterViewModel from "./view.model";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
+import { FontAwesome } from "@expo/vector-icons";
 
 function RegisterView() {
 	const navigator = useNavigation<NativeStackNavigationProp<AuthStackRoutes>>();
-	const { control, onSubmit, handleSubmit } = RegisterViewModel();
+	const { control, onSubmit, handleSubmit, showPassword, handleTogglePassword } = RegisterViewModel();
 	const isKeyboardOpen = useKeyboardOpen();
 	const city = [
 		{
@@ -28,9 +29,9 @@ function RegisterView() {
 		<Container className="justify-start h-full relative">
 			<HeaderBack />
 			<Container className="w-full justify-center items-center flex-row">
-				<Image className="w-40 h-40" source={{ uri: Logo }} />
+				<Image className="w-36 h-36" source={{ uri: Logo }} />
 				<Container>
-					<Text className="text-[#00aeed] font-extrabold text-4xl">CRIAR CONTA</Text>
+					<Text className="text-[#00aeed] font-extrabold text-3xl">CRIAR CONTA</Text>
 					<Text className="text-zinc-900 font-extrabold text-xl">DE OLHO NA GESTÃO</Text>
 				</Container>
 			</Container>
@@ -115,13 +116,23 @@ function RegisterView() {
 											<Text className="text-red-500 text-start">{error.message}</Text>
 										</Animated.View>
 									)}
-									<Input
-										placeholder="Senha"
-										className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-3 text-gray-600"
-										value={value}
-										onChangeText={onChange}
-										onBlur={onBlur}
-									/>
+									<Container className="flex-row w-full h-12 rounded-2xl border-solid border-gray-500/30 border-2 justify-between items-center p-2">
+										<Input
+											placeholder="Senha"
+											className="w-4/5 h-12 p-3 text-gray-600"
+											secureTextEntry={showPassword.password}
+											value={value}
+											onChangeText={onChange}
+											onBlur={onBlur}
+										/>
+										<Button activeOpacity={0.8} onPress={() => handleTogglePassword("password")}>
+											{showPassword.password ? (
+												<FontAwesome name={"eye-slash"} size={20} color={"#00aeed"} />
+											) : (
+												<FontAwesome name={"eye"} size={20} color={"#00aeed"} />
+											)}
+										</Button>
+									</Container>
 								</>
 							)}
 						/>
@@ -138,13 +149,23 @@ function RegisterView() {
 											<Text className="text-red-500 text-start">{error.message}</Text>
 										</Animated.View>
 									)}
-									<Input
-										placeholder="Confirmar senha"
-										className="w-full h-12  rounded-2xl border-solid border-gray-500/30 border-2 p-3 text-gray-600"
-										value={value}
-										onChangeText={onChange}
-										onBlur={onBlur}
-									/>
+									<Container className="flex-row w-full h-12 rounded-2xl border-solid border-gray-500/30 border-2 justify-between items-center p-2">
+										<Input
+											placeholder="Confirmar senha"
+											className="w-4/5 h-12 p-3 text-gray-600"
+											secureTextEntry={showPassword.confirmPassword}
+											value={value}
+											onChangeText={onChange}
+											onBlur={onBlur}
+										/>
+										<Button activeOpacity={0.8} onPress={() => handleTogglePassword("confirmPassword")}>
+											{showPassword.confirmPassword ? (
+												<FontAwesome name={"eye-slash"} size={20} color={"#00aeed"} />
+											) : (
+												<FontAwesome name={"eye"} size={20} color={"#00aeed"} />
+											)}
+										</Button>
+									</Container>
 								</>
 							)}
 						/>

@@ -5,6 +5,16 @@ import { RegisterValidationSchema } from "../../validators/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 function RegisterViewModel() {
+	const [showPassword, setShowPassword] = useState({ password: false, confirmPassword: false });
+
+	const handleTogglePassword = (mode: "password" | "confirmPassword") => {
+		if (mode === "password") {
+			setShowPassword((prevState) => ({ ...prevState, password: !prevState.password }));
+		} else if (mode === "confirmPassword") {
+			setShowPassword((prevState) => ({ ...prevState, confirmPassword: !prevState.confirmPassword }));
+		}
+	};
+
 	const { control, handleSubmit } = useForm({
 		defaultValues: {
 			email: "",
@@ -25,6 +35,8 @@ function RegisterViewModel() {
 		control,
 		onSubmit,
 		handleSubmit,
+		showPassword,
+		handleTogglePassword,
 	};
 }
 
