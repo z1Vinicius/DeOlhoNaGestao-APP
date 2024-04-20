@@ -13,6 +13,7 @@ import Toast from "react-native-toast-message";
 
 function LoginViewModel() {
 	const [loading, setLoading] = useState<boolean>(false);
+	const [showPassword, setShowPassword] = useState<boolean>(true);
 	const { control, handleSubmit } = useForm({
 		defaultValues: {
 			username: "admin",
@@ -65,6 +66,8 @@ function LoginViewModel() {
 		loading,
 		control,
 		onSubmit,
+		showPassword,
+		setShowPassword,
 		handleSubmit,
 	};
 }

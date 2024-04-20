@@ -4,6 +4,7 @@ import { Text, Image, ActivityIndicator as Loader, View as Container, TextInput 
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Controller } from "react-hook-form";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
+import { FontAwesome } from "@expo/vector-icons";
 
 import AppLogo from "../../../assets/logo/logo.png";
 const Logo = Image.resolveAssetSource(AppLogo).uri;
@@ -17,7 +18,7 @@ import LoginViewModel from "./view.model";
 
 function LoginView() {
 	const navigator = useNavigation<NativeStackNavigationProp<AuthStackRoutes>>();
-	const { handleSubmit, control, onSubmit, loading } = LoginViewModel();
+	const { handleSubmit, control, onSubmit, loading, showPassword, setShowPassword } = LoginViewModel();
 	const isKeyboardOpen = useKeyboardOpen();
 
 	return (
@@ -64,13 +65,24 @@ function LoginView() {
 											<Text className="text-red-500 text-start">{error.message}</Text>
 										</Animated.View>
 									)}
-									<Input
-										placeholder="Senha"
-										className="w-full h-12 rounded-2xl border-solid border-gray-500/30 border-2 p-2 text-gray-600"
-										value={value}
-										onChangeText={onChange}
-										onBlur={onBlur}
-									/>
+
+									<Container className="flex-row w-full h-12 rounded-2xl border-solid border-gray-500/30 border-2 justify-between items-center p-2">
+										<Input
+											placeholder="Senha"
+											className="w-4/5 h-12 text-gray-600"
+											secureTextEntry={showPassword}
+											value={value}
+											onChangeText={onChange}
+											onBlur={onBlur}
+										/>
+										<Button activeOpacity={0.8} onPress={() => setShowPassword(!showPassword)}>
+											{showPassword ? (
+												<FontAwesome name={"eye-slash"} size={20} color={"#00aeed"} />
+											) : (
+												<FontAwesome name={"eye"} size={20} color={"#00aeed"} />
+											)}
+										</Button>
+									</Container>
 								</>
 							)}
 						/>

@@ -2,6 +2,7 @@ import React from "react";
 import { Controller } from "react-hook-form";
 import { Text, Image, View as Container, TextInput as Input, TouchableOpacity as Button, ScrollView, StyleSheet } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { FontAwesome } from "@expo/vector-icons";
 
 import AppLogo from "../../../assets/logo/logo.png";
 const Logo = Image.resolveAssetSource(AppLogo).uri;
@@ -12,7 +13,6 @@ import useKeyboardOpen from "../../hooks/keyboard";
 import HeaderBack from "../../components/HeaderBack";
 import RegisterViewModel from "./view.model";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
-import { FontAwesome } from "@expo/vector-icons";
 
 function RegisterView() {
 	const navigator = useNavigation<NativeStackNavigationProp<AuthStackRoutes>>();
