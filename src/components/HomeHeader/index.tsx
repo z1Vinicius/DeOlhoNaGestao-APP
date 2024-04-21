@@ -11,7 +11,7 @@ function HomeHeader() {
 					<Text className="text-xl font-semibold">DE OLHO</Text>
 				</Container>
 				<Container className="flex-row gap-2 items-center">
-					<Button activeOpacity={0.9}>
+					<Button activeOpacity={0.7}>
 						<MaterialCommunityIcons name={"bell"} color={"black"} size={22} />
 					</Button>
 					<Button activeOpacity={0.9}>
