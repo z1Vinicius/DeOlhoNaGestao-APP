@@ -7,11 +7,13 @@ import PostEdit from "../PostEdit";
 import PostText from "../PostText";
 import PostMedia from "../PostMedia";
 
-function Post() {
+import IPost from "../../interfaces/post";
+
+function Post({ data, profile }: IPost) {
 	return (
 		<Container className="p-3 m-2 rounded-2xl bg-gray-300">
 			<Container className="flex-row gap-2 justify-between items-center">
-				<PostProfile />
+				<PostProfile name={profile.name} lastName={profile.lastName} createdAt={data.createdAt} profileImage={profile.profileImage} />
 				<PostEdit />
 			</Container>
 
