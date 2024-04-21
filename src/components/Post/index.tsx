@@ -18,8 +18,8 @@ function Post({ data, profile }: IPost) {
 			</Container>
 
 			<Container className="mt-2">
-				<PostText />
-				<PostMedia />
+				<PostText description={data.description} />
+				<PostMedia media={data.media} />
 				<PostInteraction />
 			</Container>
 		</Container>

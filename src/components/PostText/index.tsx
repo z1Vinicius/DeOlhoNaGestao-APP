@@ -1,9 +1,13 @@
 import { View as Container, Text } from "react-native";
 
-function PostText() {
+interface IPostText {
+	description: string;
+}
+
+function PostText({ description }: IPostText) {
 	return (
 		<Container>
-			<Text className="text-zinc-900">Centro da comunidade Fortaleza de Pedra em Recife há 2 semanas sem iluminação pública. Um descaso total.</Text>
+			<Text className="text-zinc-900">{description}</Text>
 		</Container>
 	);
 }

@@ -9,7 +9,7 @@ interface IPost {
 		id: string;
 		createdAt: string;
 		updatedAt: string;
-		text: string;
+		description: string;
 		media: string[];
 		likes: number;
 	};

@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const url = "http://192.168.18.3:8000";
+
 const api = axios.create({
 	timeout: 6000,
-	baseURL: "http://192.168.18.3:8000",
+	baseURL: url,
 });
 
 // const setStorageToken = async () => {
@@ -14,4 +16,5 @@ const api = axios.create({
 
 // setStorageToken();
 
+export { url };
 export default api;

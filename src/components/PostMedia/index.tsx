@@ -1,11 +1,19 @@
-import { TouchableOpacity as Button, View as Container } from "react-native";
+import React from "react";
+import { TouchableOpacity as Button, View as Container, Image, FlatList } from "react-native";
+import { url } from "../../services/api";
 
-function PostMedia() {
+interface IPostMedia {
+	media: string[];
+}
+
+function PostMedia({ media }: IPostMedia) {
+	const MediaItem = ({ item }) => {
+		return <Image source={{ uri: url + item }} className="h-32 w-32 mr-2 rounded-xl" />;
+	};
+
 	return (
-		<Container className="gap-2 flex-row mt-2">
-			<Button className="bg-cyan-500 w-20 h-20 rounded-lg"></Button>
-			<Button className="bg-cyan-600 w-20 h-20 rounded-lg"></Button>
-			<Button className="bg-cyan-700 w-20 h-20 rounded-lg"></Button>
+		<Container className="mt-2 mb-2">
+			<FlatList horizontal data={media} keyExtractor={(item) => item} renderItem={({ item }) => <MediaItem item={item} />} />
 		</Container>
 	);
 }

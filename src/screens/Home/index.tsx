@@ -15,8 +15,14 @@ function HomePage() {
 					updatedAt: "2024-05-21 00:00:00",
 					id: "12121-121212-1212-1212",
 					likes: 20,
-					media: [],
-					text: "Sono e tristeza",
+					media: [
+						"/media/post_media/image_1.png",
+						"/media/post_media/image_2.png",
+						"/media/post_media/image_3.png",
+						"/media/post_media/image_3.png",
+						"/media/post_media/image_3.png",
+					],
+					description: "Sono e tristeza",
 				}}
 				profile={{
 					createdBy: "12121-1212-1212-121212-121212",
