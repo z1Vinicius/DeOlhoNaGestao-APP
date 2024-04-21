@@ -4,4 +4,8 @@ type AuthStackRoutes = {
 	Register: undefined;
 };
 
-export { AuthStackRoutes };
+type ProfileRoutes = {
+	Home: undefined;
+};
+
+export { AuthStackRoutes, ProfileRoutes };
