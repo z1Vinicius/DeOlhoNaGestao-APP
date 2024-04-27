@@ -9,6 +9,7 @@ const BottomRoutesStyles = ({ route }: BottomTabScreenProps<BottomRoutesParams>)
 	tabBarInactiveBackgroundColor: "#1aace4",
 	tabBarActiveTintColor: "#FFF",
 	tabBarInactiveTintColor: "#FFF",
+	tabBarItemStyle: { padding: 3, display: !visibleRoutes.includes(route.name) ? "none" : "flex" },
 	tabBarStyle: { height: 50 },
 	tabBarShowLabel: false,
 	tabBarIcon: ({ focused, size }: any) => {
@@ -18,10 +19,13 @@ const BottomRoutesStyles = ({ route }: BottomTabScreenProps<BottomRoutesParams>)
 
 		if (routeName == "Home") {
 			iconName = focused ? "home" : "home-outline";
-		} else if ((routeName = "NewPost")) iconName = focused ? "add-circle" : "add-circle-outline";
-		else if ((routeName = "Profile")) iconName = focused ? "person" : "person-outline";
+		} else if (routeName == "NewPost") {
+			iconName = focused ? "add-circle" : "add-circle-outline";
+		} else if (routeName == "Profile") {
+			iconName = focused ? "person" : "person-outline";
+		}
 
-		return <Ionicons name={iconName} size={26} color={"#FFF"} />;
+		return <Ionicons name={iconName} size={30} color={"#FFF"} />;
 	},
 });
 

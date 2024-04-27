@@ -10,8 +10,9 @@ import "react-native-gesture-handler";
 import "react-native-get-random-values";
 import Routes from "./src/routes";
 
+import database from "./src/db/infra/db/settings/connection";
 import { NativeWindStyleSheet } from "nativewind";
-
+database;
 function App() {
 	return (
 		<GluestackUIProvider config={config}>

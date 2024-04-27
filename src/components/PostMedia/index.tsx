@@ -8,7 +8,11 @@ interface IPostMedia {
 
 function PostMedia({ media }: IPostMedia) {
 	const MediaItem = ({ item }) => {
-		return <Image source={{ uri: url + item }} className="h-32 w-32 mr-2 rounded-xl" />;
+		return (
+			<Button activeOpacity={0.9}>
+				<Image source={{ uri: url + item }} className="h-32 w-32 mr-2 rounded-xl" />
+			</Button>
+		);
 	};
 
 	return (
