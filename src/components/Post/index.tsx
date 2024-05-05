@@ -11,7 +11,6 @@ import IPost from "../../interfaces/post";
 import { useEffect } from "react";
 
 function Post({ data, profile }: IPost) {
-	console.log(data, profile);
 	return (
 		<Container className="p-3 m-2 rounded-2xl bg-gray-300">
 			<Container className="flex-row gap-2 justify-between items-center">

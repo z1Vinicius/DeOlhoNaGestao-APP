@@ -2,18 +2,21 @@ import HomeHeader from "../../components/HomeHeader";
 import HomePublish from "../../components/HomePublish";
 import Post from "../../components/Post";
 
-import { View as Container } from "react-native";
+import { View as Container, FlatList } from "react-native";
 import api from "../../services/api";
 import { useEffect, useState } from "react";
 import { map } from "zod";
 
+import { PostRepository, PostFeedRepository } from "src/db/infra/db/repositories/post.repository";
 function HomePage() {
 	const [posts, setPosts] = useState([]);
 
 	useEffect(() => {
 		async function getUserPosts() {
-			const request = await api.get("api/posts/user/");
-			setPosts(request.data);
+			const request = await api.get("api/posts/feed/update");
+			setPosts(request.data.data);
+			await PostRepository.loadManyPosts(request.data.data);
+			await PostFeedRepository.createOrUpdateBasedOnExistence(request.data);
 		}
 
 		getUserPosts();
@@ -24,8 +27,7 @@ function HomePage() {
 		<Container>
 			<HomeHeader />
 			<HomePublish />
-
-			{posts.length > 0 ? posts.map((post) => <Post data={post.data} profile={post.profile} />) : ""}
+			{posts.length > 0 ? <FlatList data={posts} keyExtractor={(item) => item.data.id} renderItem={({ item }) => <Post data={item.data} profile={item.profile} />} /> : ""}
 		</Container>
 	);
 }

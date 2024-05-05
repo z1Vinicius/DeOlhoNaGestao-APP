@@ -10,11 +10,17 @@ interface IPost {
 		createdAt: string;
 		updatedAt: string;
 		description: string;
+		feed_category: string;
 		media: string[];
 		likes: number;
 	};
 }
 
-export { IPost };
+interface IPostFeed {
+	feed_category: string;
+	updated_at: string;
+}
+
+export { IPost, IPostFeed };
 
 export default IPost;
