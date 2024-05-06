@@ -4,6 +4,7 @@ import { Alert } from "react-native";
 import database from "../settings/connection";
 import { PostFeedModel, PostModel } from "../entities/entities";
 import { IPost, IPostFeed } from "src/interfaces/post";
+const dayjs = require("dayjs");
 
 export class PostRepository {
 	static async getBase() {
@@ -166,6 +167,12 @@ export class PostFeedRepository {
 		return database.get<PostFeedModel>(PostFeedModel.table);
 	}
 
+	static async fetchRecentFeed() {
+		const base = await this.getBase();
+		const response = await base.query(Q.where("feed_category", Q.notEq("")), Q.where("feed_category", Q.notEq(null)), Q.sortBy("updated_at", Q.desc), Q.take(10)).fetch();
+		return response;
+	}
+
 	static async fetchAllData() {
 		const base = await this.getBase();
 		const response = await base.query().fetch();
@@ -250,5 +257,17 @@ export class PostFeedRepository {
 		}
 		await PostFeedRepository.updateFeed(feedCategory);
 		return true;
+	}
+
+	static async getRecentFeed() {
+		const base = await PostFeedRepository.fetchRecentFeed();
+		const object: { categories: { feed_category: string; last_update: string }[] } = { categories: [] };
+		base.forEach((element) => {
+			object.categories.push({
+				feed_category: element.feed_category,
+				last_update: dayjs(new Date(element.updated_at)).format("YYYY-MM-DD HH:mm:ss.SSSSSS"),
+			});
+		});
+		return object;
 	}
 }

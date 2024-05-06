@@ -13,7 +13,9 @@ function HomePage() {
 
 	useEffect(() => {
 		async function getUserPosts() {
-			const request = await api.get("api/posts/feed/update");
+			const data = await PostFeedRepository.getRecentFeed();
+			console.log("dado", data);
+			const request = await api.post("api/posts/feed/update", data);
 			setPosts(request.data.data);
 			await PostRepository.loadManyPosts(request.data.data);
 			await PostFeedRepository.createOrUpdateBasedOnExistence(request.data);
