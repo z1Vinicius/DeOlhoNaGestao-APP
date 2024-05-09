@@ -169,7 +169,7 @@ export class PostFeedRepository {
 
 	static async fetchRecentFeed() {
 		const base = await this.getBase();
-		const response = await base.query(Q.where("feed_category", Q.notEq("")), Q.where("feed_category", Q.notEq(null)), Q.sortBy("updated_at", Q.desc), Q.take(10)).fetch();
+		const response = await base.query(Q.where("feed_category", Q.notEq("")), Q.where("feed_category", Q.notEq(null)), Q.sortBy("updated_at", Q.desc), Q.take(50)).fetch();
 		return response;
 	}
 

@@ -2,54 +2,60 @@ import HomeHeader from "../../components/HomeHeader";
 import HomePublish from "../../components/HomePublish";
 import Post from "../../components/Post";
 
-import { View as Container, FlatList } from "react-native";
-import api from "../../services/api";
-import { useEffect, useState } from "react";
-import { map } from "zod";
+import { View as Container, Text, TouchableOpacity as Button, ActivityIndicator as Spinner } from "react-native";
 
-import { PostRepository, PostFeedRepository } from "src/db/infra/db/repositories/post.repository";
+import { FlashList } from "@shopify/flash-list";
+import HomeViewModel from "./view.model";
+
 function HomePage() {
-	const [posts, setPosts] = useState([]);
-
-	useEffect(() => {
-		async function getUserPosts() {
-			const data = await PostFeedRepository.getRecentFeed();
-			console.log("dado", data);
-			const request = await api.post("api/posts/feed/update", data);
-			setPosts(request.data.data);
-			await PostRepository.loadManyPosts(request.data.data);
-			await PostFeedRepository.createOrUpdateBasedOnExistence(request.data);
-		}
-
-		getUserPosts();
-		return () => {};
-	}, []);
-
+	const { handleLoadFeed, handleLoadPosts, isLoading, posts } = HomeViewModel();
 	return (
-		<Container>
+		<Container className="flex-1">
 			<HomeHeader />
 			<HomePublish />
-			{posts.length > 0 ? <FlatList data={posts} keyExtractor={(item) => item.data.id} renderItem={({ item }) => <Post data={item.data} profile={item.profile} />} /> : ""}
+			{posts.length > 0 ? (
+				<Container style={{ flexGrow: 1, flexDirection: "row" }}>
+					<FlashList
+						renderItem={({ item }) => {
+							return <Post data={item} />;
+						}}
+						getItemType={(item) => {
+							return item.uuid;
+						}}
+						data={posts}
+						estimatedItemSize={20}
+						ListFooterComponent={() => (
+							<Container className="h-52 w-full p-3 items-center">
+								<Button
+									disabled={isLoading}
+									activeOpacity={0.8}
+									className="w-3/4 h-10  bg-[#21ace1] rounded-full"
+									onPress={async () => {
+										await handleLoadFeed();
+									}}
+								>
+									<Container className="flex-1 justify-center items-center flex-row gap-3">
+										{isLoading ? (
+											<>
+												<Spinner color={"#FFF"} size={"small"} />
+												<Text className="text-slate-50 text-center">Carregando</Text>
+											</>
+										) : (
+											<Text className="text-slate-50 text-center">Carregar mais</Text>
+										)}
+									</Container>
+								</Button>
+							</Container>
+						)}
+					/>
+				</Container>
+			) : (
+				<Container className="flex-1 justify-center items-center">
+					<Spinner color={"#21ace1"} size={"large"} />
+				</Container>
+			)}
 		</Container>
 	);
-}
-
-{
-	/* <Post
-data={{
-	createdAt: "2024-05-21 15:22:33",
-	updatedAt: "2024-05-21 00:00:00",
-	id: "12121-121212-1212-1212",
-	likes: 20,
-	media: ["/media/post_media/image_1.png", "/media/post_media/image_2.png", "/media/post_media/image_3.png"],
-	description: "Buceta 123",
-}}
-profile={{
-	createdBy: "12121-1212-1212-121212-121212",
-	lastName: "Silva",
-	name: "Veneceos",
-	profileImage: "12121212",
-}} */
 }
 
 export default HomePage;

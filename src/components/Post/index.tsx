@@ -7,14 +7,17 @@ import PostEdit from "../PostEdit";
 import PostText from "../PostText";
 import PostMedia from "../PostMedia";
 
-import IPost from "../../interfaces/post";
-import { useEffect } from "react";
+import { PostModel } from "src/db/infra/db/entities/entities";
 
-function Post({ data, profile }: IPost) {
+interface IPost {
+	data: PostModel;
+}
+
+function Post({ data }: IPost) {
 	return (
 		<Container className="p-3 m-2 rounded-2xl bg-gray-300">
 			<Container className="flex-row gap-2 justify-between items-center">
-				<PostProfile name={profile?.name} lastName={profile?.lastName} createdAt={data?.createdAt} profileImage={profile?.profileImage} />
+				<PostProfile name={data?.name} lastName={data.last_name} createdAt={new Date(data.created_at).toDateString()} profileImage={data.profile_image} />
 				<PostEdit />
 			</Container>
 
