@@ -9,7 +9,6 @@ export function randomTwoPhrases(phrases: string[]) {
 
 export function nameToColor(nome: string, sobrenome: string): string {
 	const nomeCompleto = nome + sobrenome;
-	// Função de hash simples
 	function simpleHash(str: string): number {
 		let hash = 0;
 		for (let i = 0; i < str.length; i++) {
@@ -18,10 +17,7 @@ export function nameToColor(nome: string, sobrenome: string): string {
 		return hash;
 	}
 
-	// Calculando o hash do nome completo
 	const hashValue = simpleHash(nomeCompleto);
-
-	// Convertendo o hash em uma cor hexadecimal e ajustando a saturação e luminosidade
 	const color = `hsl(${hashValue % 360}, 70%, 80%)`;
 
 	return color;

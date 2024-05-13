@@ -4,7 +4,7 @@ import database from "../db/infra/db/settings/connection";
 const url = "http://192.168.18.3:8000";
 
 const api = axios.create({
-	timeout: 6000,
+	timeout: 1500,
 	baseURL: url,
 });
 

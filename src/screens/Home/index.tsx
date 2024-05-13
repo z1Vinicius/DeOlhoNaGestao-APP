@@ -1,10 +1,13 @@
-import HomeHeader from "../../components/HomeHeader";
-import HomePublish from "../../components/HomePublish";
-import Post from "../../components/Post";
-
-import { View as Container, Text, TouchableOpacity as Button, ActivityIndicator as Spinner } from "react-native";
+import React from "react";
+import { Text, TouchableOpacity as Button, View as Container, ActivityIndicator as Spinner } from "react-native";
 
 import { FlashList } from "@shopify/flash-list";
+
+import HomeHeader from "../../components/HomeHeader";
+import HomePublish from "../../components/HomePublish";
+import NewPostActionSheet from "../../components/PostActionSheet";
+import Post from "../../components/Post";
+
 import HomeViewModel from "./view.model";
 
 function HomePage() {
@@ -13,6 +16,7 @@ function HomePage() {
 		<Container className="flex-1">
 			<HomeHeader />
 			<HomePublish />
+			<NewPostActionSheet />
 			{posts.length > 0 ? (
 				<Container style={{ flexGrow: 1, flexDirection: "row" }}>
 					<FlashList

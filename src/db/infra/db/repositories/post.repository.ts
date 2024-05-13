@@ -13,7 +13,7 @@ export class PostRepository {
 
 	static async fetchAllData() {
 		const base = await this.getBase();
-		const response = await base.query().fetch();
+		const response = await base.query(Q.sortBy("created_at", "desc")).fetch();
 		return response;
 	}
 
