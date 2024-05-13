@@ -11,12 +11,12 @@ import Post from "../../components/Post";
 import HomeViewModel from "./view.model";
 
 function HomePage() {
-	const { handleLoadFeed, handleLoadPosts, isLoading, posts } = HomeViewModel();
+	const { handleLoadFeed, createPost, isLoading, posts } = HomeViewModel();
 	return (
 		<Container className="flex-1">
 			<HomeHeader />
-			<HomePublish />
-			<NewPostActionSheet />
+			<HomePublish open={() => createPost.current?.handleOpen()} />
+			<NewPostActionSheet ref={createPost} />
 			{posts.length > 0 ? (
 				<Container style={{ flexGrow: 1, flexDirection: "row" }}>
 					<FlashList

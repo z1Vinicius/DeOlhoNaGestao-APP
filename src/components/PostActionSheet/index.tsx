@@ -12,8 +12,14 @@ import IPost from "src/interfaces/post";
 import useStore from "src/stores/feed";
 import { ImagePickerSuccessResult } from "expo-image-picker";
 
+export interface IPostActionChooseRef {
+	handleOpen: () => void;
+	handleClose: () => void;
+	checkUpdates: () => Promise<boolean>;
+}
+
 function NewPostActionSheet(props, ref) {
-	const [showActionsheet, setShowActionsheet] = useState(true);
+	const [showActionsheet, setShowActionsheet] = useState(false);
 	const [images, setImages] = useState<ImagePickerSuccessResult[]>([]);
 	const [buttonDisable, setDisable] = useState<boolean>(true);
 	const updateFeed = useStore((state) => state.emitEvent);
@@ -99,24 +105,6 @@ function NewPostActionSheet(props, ref) {
 
 	const handleOpen = () => {
 		setShowActionsheet(true);
-		Alert.alert(
-			"Aviso Importante: Não Compartilhe Sua Senha",
-			"É fundamental lembrar que a sua senha é pessoal e intransferível. Compartilhar sua senha com outras pessoas pode comprometer a segurança dos seus dados e informações pessoais.\n\nPor favor, tenha em mente que é de sua responsabilidade manter sua senha em sigilo e protegida contra acesso não autorizado. Nunca compartilhe sua senha com ninguém, incluindo amigos, familiares ou colegas de trabalho.",
-			[
-				{
-					text: "Voltar",
-					onPress: () => setShowActionsheet(false),
-					style: "cancel",
-				},
-				{
-					text: "Concordo com os termos",
-					style: "default",
-				},
-			],
-			{
-				cancelable: false,
-			}
-		);
 	};
 	const handleClose = () => setShowActionsheet(false);
 
@@ -180,7 +168,7 @@ function NewPostActionSheet(props, ref) {
 									""
 								)}
 								{images.map((image, index) => (
-									<View className="relative m-2">
+									<View className="relative m-2" key={Math.random().toString()}>
 										<Image key={index} source={{ uri: image }} className="w-32 h-32 rounded-md" />
 										<Button
 											onPress={() => removeImage(index)}

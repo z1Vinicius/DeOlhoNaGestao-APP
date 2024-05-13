@@ -1,17 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import api from "../../services/api";
 import { PostRepository, PostFeedRepository } from "src/db/infra/db/repositories/post.repository";
 import { PostModel } from "src/db/infra/db/entities/entities";
 import useStore from "src/stores/feed";
+import { IPostActionChooseRef } from "@components/PostActionSheet";
 
 function HomeViewModel() {
 	const [posts, setPosts] = useState<PostModel[]>([]);
-	const [isLoading, setLoading] = useState<boolean>(false);
+	const [isLoading, setLoading] = useState<boolean>(true);
 	const receiveEvent = useStore((state) => state.eventCounter);
+	const createPost = useRef<IPostActionChooseRef>(null);
 
 	const handleLoadFeed = async () => {
 		try {
-			setLoading(true);
 			const data = await PostFeedRepository.getRecentFeed();
 			const request = await api.post("api/posts/feed/update", data);
 			await PostRepository.loadManyPosts(request.data.data);
@@ -19,12 +20,15 @@ function HomeViewModel() {
 			await handleLoadPosts();
 		} catch {
 		} finally {
-			setLoading(false);
 		}
 	};
 
 	const handleLoadPosts = async () => {
+		setLoading(true);
 		setPosts(await PostRepository.fetchAllData());
+		setTimeout(() => {
+			setLoading(false);
+		}, 2000);
 	};
 
 	useEffect(() => {
@@ -42,6 +46,7 @@ function HomeViewModel() {
 		posts,
 		handleLoadFeed,
 		handleLoadPosts,
+		createPost,
 	};
 }
 
