@@ -16,7 +16,7 @@ function PostMedia({ media }: IPostMedia) {
 		return (
 			<Container className="h-32 w-full">
 				<Button activeOpacity={0.9}>
-					<Image source={{ uri: url + item }} onError={(error) => console.log("Image error:", error)} className="h-32 w-32 mr-2 rounded-xl" />
+					<Image source={{ uri: url + item }} className="h-32 w-32 mr-2 rounded-xl" />
 				</Button>
 			</Container>
 		);

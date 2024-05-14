@@ -2,7 +2,7 @@ import { appSchema } from "@nozbe/watermelondb";
 import { tableSchema } from "@nozbe/watermelondb";
 
 const schemas = appSchema({
-	version: 1,
+	version: 2,
 	tables: [
 		tableSchema({
 			name: "profile",
@@ -23,6 +23,7 @@ const schemas = appSchema({
 				{ name: "updated_at", type: "number" },
 				{ name: "created_by", type: "string" },
 				{ name: "likes", type: "number" },
+				{ name: "hasLike", type: "boolean" },
 				{ name: "media", type: "string" },
 				{ name: "description", type: "string" },
 				{ name: "name", type: "string" },

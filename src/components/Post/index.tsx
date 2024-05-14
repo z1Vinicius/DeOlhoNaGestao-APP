@@ -15,7 +15,7 @@ interface IPost {
 
 function Post({ data }: IPost) {
 	return (
-		<Container className="p-3 m-2 rounded-2xl bg-gray-300">
+		<Container className="p-3 m-2 rounded-2xl bg-zinc-200">
 			<Container className="flex-row gap-2 justify-between items-center">
 				<PostProfile name={data?.name} lastName={data.last_name} createdAt={new Date(data.created_at).toDateString()} profileImage={data.profile_image} />
 				<PostEdit />
@@ -24,7 +24,7 @@ function Post({ data }: IPost) {
 			<Container className="mt-2">
 				<PostText description={data?.description} />
 				<PostMedia media={data?.media} />
-				<PostInteraction hasLike={false} likes={data.likes} />
+				<PostInteraction hasLike={data.hasLike} likes={data.likes} postId={data.uuid} />
 			</Container>
 		</Container>
 	);

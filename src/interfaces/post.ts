@@ -13,6 +13,7 @@ interface IPost {
 		feed_category: string;
 		media: string[];
 		likes: number;
+		hasLike: boolean;
 	};
 }
 

@@ -57,6 +57,7 @@ export class PostRepository {
 					data.created_at = Date.parse(element.data.createdAt as string);
 					data.updated_at = Date.parse(element.data.updatedAt as string);
 					data.likes = element.data.likes || 0;
+					data.hasLike = element.data.hasLike || false;
 					data.media = element.data.media;
 					data.description = element.data.description;
 					data.name = element.profile.name;
@@ -80,6 +81,7 @@ export class PostRepository {
 			const queryUpdate = result.prepareUpdate((data) => {
 				data.updated_at = Date.parse(postData.data.updatedAt as string);
 				data.likes = postData.data.likes || 0;
+				data.hasLike = postData.data.hasLike || false;
 				data.media = postData.data.media;
 				data.description = postData.data.description;
 				data.name = postData.profile.name;
@@ -101,6 +103,7 @@ export class PostRepository {
 				data.created_at = Date.parse(postData.data.createdAt as string);
 				data.updated_at = Date.parse(postData.data.updatedAt as string);
 				data.likes = postData.data.likes || 0;
+				data.hasLike = postData.data.hasLike || false;
 				data.media = postData.data.media;
 				data.description = postData.data.description;
 				data.name = postData.profile.name;
@@ -219,7 +222,6 @@ export class PostFeedRepository {
 
 	static async createFeed(feed: IPostFeed) {
 		try {
-			console.log(feed.feed_category, feed.updated_at);
 			const base = await this.getBase();
 			const feedCreate = base.prepareCreate((data) => {
 				data.feed_category = feed.feed_category || "";

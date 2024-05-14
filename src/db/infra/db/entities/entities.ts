@@ -15,6 +15,9 @@ export class PostModel extends Model {
 	@field("name")
 	name!: string;
 
+	@field("hasLike")
+	hasLike!: boolean;
+
 	@field("last_name")
 	last_name!: string;
 

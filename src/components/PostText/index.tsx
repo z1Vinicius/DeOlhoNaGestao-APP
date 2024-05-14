@@ -6,8 +6,8 @@ interface IPostText {
 
 function PostText({ description }: IPostText) {
 	return (
-		<Container>
-			<Text className="text-zinc-900">{description}</Text>
+		<Container className="mb-1">
+			<Text className="text-zinc-900 text-base">{description}</Text>
 		</Container>
 	);
 }
