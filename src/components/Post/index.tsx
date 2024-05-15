@@ -1,5 +1,4 @@
 import { View as Container, TouchableOpacity as Button, Text } from "react-native";
-import { Feather, AntDesign } from "@expo/vector-icons";
 
 import PostInteraction from "../PostInteraction";
 import PostProfile from "../PostProfile";
@@ -18,7 +17,7 @@ function Post({ data }: IPost) {
 		<Container className="p-3 m-2 rounded-2xl bg-zinc-200">
 			<Container className="flex-row gap-2 justify-between items-center">
 				<PostProfile name={data?.name} lastName={data.last_name} createdAt={new Date(data.created_at).toDateString()} profileImage={data.profile_image} />
-				<PostEdit />
+				<PostEdit createdBy={data.created_by} postId={data.uuid} />
 			</Container>
 
 			<Container className="mt-2">

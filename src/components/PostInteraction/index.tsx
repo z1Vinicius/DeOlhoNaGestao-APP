@@ -79,7 +79,7 @@ function PostInteraction({ likes, hasLike, postId }: IPostInteraction) {
 					</Animated.View>
 				</Button>
 				<Button disabled={isLoading} onPress={handleLike}>
-					<Text>{hasPostLike ? "Descurtir" : "Curtir"}</Text>
+					<Text className={hasPostLike ? "text-[#21ace1] font-bold" : "#000"}>{hasPostLike ? "Descurtir" : "Curtir"}</Text>
 				</Button>
 			</Container>
 
