@@ -8,6 +8,12 @@ import api from "src/services/api";
 import { PostRepository } from "src/db/infra/db/repositories/post.repository";
 import IPost from "src/interfaces/post";
 
+interface IPostInteraction {
+	likes: number;
+	hasLike: boolean;
+	postId: string;
+}
+
 const ANGLE = 10;
 const TIME = 100;
 const EASING = Easing.elastic(1.5);

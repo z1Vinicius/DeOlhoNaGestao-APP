@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, TouchableOpacity as Button, View as Container, ActivityIndicator as Spinner } from "react-native";
+import { Text, TouchableOpacity as Button, View as Container, ActivityIndicator as Spinner, RefreshControl } from "react-native";
 
 import { FlashList } from "@shopify/flash-list";
 
@@ -20,6 +20,7 @@ function HomePage() {
 			{posts.length > 0 ? (
 				<Container style={{ flexGrow: 1, flexDirection: "row" }}>
 					<FlashList
+						refreshControl={<RefreshControl progressBackgroundColor={"#1aabe40"} refreshing={isLoading} onRefresh={async () => await handleLoadFeed()} />}
 						renderItem={({ item }) => {
 							return <Post data={item} />;
 						}}
