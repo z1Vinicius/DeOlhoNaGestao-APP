@@ -12,7 +12,7 @@ const dayjs = require("dayjs");
 
 function PostProfile({ name, lastName, profileImage, createdAt }: IPostProfile) {
 	const fullName = `${name} ${lastName}`;
-	const postDate = useMemo(() => dayjs(createdAt).format("DD/MM/YYYY HH:mm"), [createdAt]);
+	const postDate = useMemo(() => dayjs(createdAt).format("DD/MM/YYYY"), [createdAt]);
 
 	return (
 		<Container className="flex-row gap-2 p-2">

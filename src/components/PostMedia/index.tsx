@@ -9,7 +9,7 @@ interface IPostMedia {
 
 function PostMedia({ media }: IPostMedia) {
 	useEffect(() => {
-		console.log("Renderizou", new Date().toString());
+		// console.log("Renderizou", new Date().toString());
 	}, []);
 
 	const MediaItem = ({ item }) => {

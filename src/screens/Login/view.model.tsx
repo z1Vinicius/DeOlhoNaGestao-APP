@@ -41,7 +41,7 @@ function LoginViewModel() {
 		const profile = await AuthService.profile();
 		const profileEntity = AuthMapper.AuthProfile(profile);
 		if (profileEntity.status === 200) {
-			await database.localStorage.set("auth.profile", JSON.stringify(profileEntity));
+			await database.localStorage.set("auth.profile", JSON.stringify(profileEntity.data));
 			Toast.show({
 				type: "showSuccess",
 				text1: "Logado com sucesso",
