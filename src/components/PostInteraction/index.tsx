@@ -90,7 +90,7 @@ function PostInteraction({ likes, hasLike, postId }: IPostInteraction) {
 			</Container>
 
 			<Container className="text-sm flex-row gap-2 items-center">
-				{hasLike > 0 ? (
+				{likeCount > 0 ? (
 					<>
 						<AntDesign name={"eye"} color={"#21ace1"} size={20} />
 						<Text>

@@ -4,7 +4,7 @@ import stringPhrases from "../../data/messages";
 
 function MainAuthViewModel() {
 	const [phrases, setPhrases] = useState<string[]>(randomTwoPhrases(stringPhrases));
-	const [isChange, setIsChange] = useState<boolean>(true);
+	const [isChange, setIsChange] = useState<boolean>(false);
 
 	useEffect(() => {
 		const interval = setInterval(() => {

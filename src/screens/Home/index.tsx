@@ -20,7 +20,7 @@ function HomePage() {
 			{posts.length > 0 ? (
 				<Container style={{ flexGrow: 1, flexDirection: "row" }}>
 					<FlashList
-						refreshControl={<RefreshControl progressBackgroundColor={"#1aabe40"} refreshing={isLoading} onRefresh={async () => await handleLoadFeed()} />}
+						refreshControl={<RefreshControl refreshing={isLoading} onRefresh={async () => await handleLoadFeed()} />}
 						renderItem={({ item }) => {
 							return <Post data={item} />;
 						}}

@@ -10,10 +10,13 @@ import AuthService from "../../api/auth.services";
 import AuthMapper from "../../mappers/auth.mapper";
 import { IAuthSuccess } from "../../interfaces/auth";
 import Toast from "react-native-toast-message";
+import useStoreAuth from "src/stores/login";
 
 function LoginViewModel() {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [showPassword, setShowPassword] = useState<boolean>(true);
+	const updateLogin = useStoreAuth((state) => state.emitEvent);
+
 	const { control, handleSubmit } = useForm({
 		defaultValues: {
 			username: "admin",
@@ -31,6 +34,7 @@ function LoginViewModel() {
 			const data = authEntity.data as IAuthSuccess;
 			await database.localStorage.set("auth.access", data.access);
 			await database.localStorage.set("auth.refresh", data.refresh);
+			updateLogin();
 			Toast.show({
 				type: "showSuccess",
 				text1: "Logado com sucesso",
@@ -58,7 +62,6 @@ function LoginViewModel() {
 		}
 
 		await sleep(2000);
-		Alert.alert("Successful", JSON.stringify(data));
 		setLoading(false);
 	};
 
