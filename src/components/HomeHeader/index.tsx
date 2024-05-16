@@ -13,12 +13,10 @@ function HomeHeader() {
 	useEffect(() => {
 		const getName = async () => {
 			const data = (await database.localStorage.get("auth.profile")) as string;
-			console.log(data);
 			if (data) {
 				const parse = JSON.parse(data) as IAuthProfile["data"];
 				setFirstName(parse.firstName as string);
 				setLastName(parse.lastName as string);
-				console.log(parse.firstName, parse.LastName);
 			}
 		};
 		getName();

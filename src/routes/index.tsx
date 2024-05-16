@@ -11,13 +11,14 @@ function Routes() {
 	async function checkAuth() {
 		if (await database.localStorage.get("auth.access")) {
 			setAuth(true);
+			return;
 		}
-		return false;
+		setAuth(false);
 	}
 
 	useEffect(() => {
 		// setAuth(false);
-		console.log("Verificou");
+		// console.log("Verificou");
 
 		checkAuth();
 		return () => {};

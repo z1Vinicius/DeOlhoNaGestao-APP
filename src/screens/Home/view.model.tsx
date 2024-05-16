@@ -20,7 +20,6 @@ function HomeViewModel() {
 			if (data) {
 				const parse = JSON.parse(data) as IAuthProfile["data"];
 				setUserId(parse.id);
-				console.log("criado por", parse.id);
 			}
 		};
 		getName();

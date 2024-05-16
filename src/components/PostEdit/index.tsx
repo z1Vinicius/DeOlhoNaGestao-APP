@@ -18,14 +18,7 @@ function PostEdit({ createdBy, postId, userId }: IPostEdit) {
 	const [isLoading, setLoading] = useState(false);
 	const updateFeed = useStore((state) => state.emitEvent);
 
-	useEffect(() => {
-		console.log("criado", createdBy, "user", userId);
-
-		return () => {};
-	}, []);
-
 	const handleDelete = async () => {
-		//
 		try {
 			const id = postId.replaceAll("-", "");
 			setLoading(true);
