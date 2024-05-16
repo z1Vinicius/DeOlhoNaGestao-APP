@@ -19,6 +19,9 @@ function HomeViewModel() {
 			await PostFeedRepository.createOrUpdateBasedOnExistence(request.data);
 			await handleLoadPosts();
 		} catch {
+			setTimeout(async () => {
+				await handleLoadFeed();
+			}, 5000);
 		} finally {
 		}
 	};

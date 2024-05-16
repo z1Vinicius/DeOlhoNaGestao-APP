@@ -11,6 +11,7 @@ import AuthMapper from "../../mappers/auth.mapper";
 import { IAuthSuccess } from "../../interfaces/auth";
 import Toast from "react-native-toast-message";
 import useStoreAuth from "src/stores/login";
+import { setStorageToken } from "src/services/api";
 
 function LoginViewModel() {
 	const [loading, setLoading] = useState<boolean>(false);
@@ -34,6 +35,7 @@ function LoginViewModel() {
 			const data = authEntity.data as IAuthSuccess;
 			await database.localStorage.set("auth.access", data.access);
 			await database.localStorage.set("auth.refresh", data.refresh);
+			await setStorageToken();
 			updateLogin();
 			Toast.show({
 				type: "showSuccess",

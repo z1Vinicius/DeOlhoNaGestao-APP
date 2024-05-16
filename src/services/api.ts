@@ -17,5 +17,5 @@ const setStorageToken = async () => {
 
 setStorageToken();
 
-export { url };
+export { url, setStorageToken };
 export default api;
