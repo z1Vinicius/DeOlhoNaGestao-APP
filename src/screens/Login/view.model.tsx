@@ -36,13 +36,22 @@ function LoginViewModel() {
 			await database.localStorage.set("auth.access", data.access);
 			await database.localStorage.set("auth.refresh", data.refresh);
 			await setStorageToken();
-			updateLogin();
+		}
+
+		const profile = await AuthService.profile();
+		const profileEntity = AuthMapper.AuthProfile(profile);
+		if (profileEntity.status === 200) {
+			await database.localStorage.set("auth.profile", JSON.stringify(profileEntity));
 			Toast.show({
 				type: "showSuccess",
 				text1: "Logado com sucesso",
 				text2: "Bem vindo! 👋",
 				position: "bottom",
 			});
+			updateLogin();
+		} else {
+			await database.localStorage.remove("auth.access");
+			await database.localStorage.remove("auth.refresh");
 		}
 
 		if (authEntity.status === 500) {

@@ -12,6 +12,15 @@ class AuthService {
 			return error as AxiosError;
 		}
 	}
+	static async profile(): Promise<AxiosResponse | AxiosError | undefined> {
+		try {
+			return await api.get("api/auth/profile").then(async (response) => {
+				return response as AxiosResponse;
+			});
+		} catch (error) {
+			return error as AxiosError;
+		}
+	}
 }
 
 export default AuthService;

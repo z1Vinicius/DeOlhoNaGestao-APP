@@ -15,4 +15,22 @@ interface IAuthLogin {
 	data: IAuthSuccess | IResponseError;
 }
 
-export { IAuthLogin, IAuthSuccess, ILogin };
+interface IAuthProfile {
+	status: number;
+	data:
+		| {
+				email: string;
+				username: string;
+				firstName: string;
+				lastName: string;
+				isAuthenticated: boolean;
+				profileImage: boolean;
+				verified: boolean;
+				assignments: {
+					permissions: string[];
+				};
+		  }
+		| IResponseError;
+}
+
+export { IAuthLogin, IAuthSuccess, IAuthProfile, ILogin };
