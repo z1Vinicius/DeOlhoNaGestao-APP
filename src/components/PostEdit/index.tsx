@@ -1,22 +1,28 @@
 import { TouchableOpacity as Button, View as Container } from "react-native";
 import { FontAwesome, Feather } from "@expo/vector-icons";
 import { Menu, MenuItem, MenuItemLabel } from "@gluestack-ui/themed";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useStore from "src/stores/feed";
 import api from "src/services/api";
 import { sleep } from "src/utils/functions";
-
 import { PostRepository } from "src/db/infra/db/repositories/post.repository";
 import { ToastAndroid } from "react-native";
 
 interface IPostEdit {
 	createdBy: string;
 	postId: string;
+	userId: string;
 }
 
-function PostEdit({ createdBy, postId }: IPostEdit) {
+function PostEdit({ createdBy, postId, userId }: IPostEdit) {
 	const [isLoading, setLoading] = useState(false);
 	const updateFeed = useStore((state) => state.emitEvent);
+
+	useEffect(() => {
+		console.log("criado", createdBy, "user", userId);
+
+		return () => {};
+	}, []);
 
 	const handleDelete = async () => {
 		//
@@ -49,7 +55,7 @@ function PostEdit({ createdBy, postId }: IPostEdit) {
 					);
 				}}
 			>
-				{!createdBy ? (
+				{createdBy === userId ? (
 					<MenuItem
 						key="delete"
 						textValue="Delete"

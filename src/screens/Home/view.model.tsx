@@ -4,12 +4,27 @@ import { PostRepository, PostFeedRepository } from "src/db/infra/db/repositories
 import { PostModel } from "src/db/infra/db/entities/entities";
 import useStore from "src/stores/feed";
 import { IPostActionChooseRef } from "@components/PostActionSheet";
+import database from "src/db/infra/db/settings/connection";
+import { IAuthProfile } from "src/interfaces/auth";
 
 function HomeViewModel() {
 	const [posts, setPosts] = useState<PostModel[]>([]);
 	const [isLoading, setLoading] = useState<boolean>(false);
+	const [userId, setUserId] = useState("");
 	const receiveEvent = useStore((state) => state.eventCounter);
 	const createPost = useRef<IPostActionChooseRef>(null);
+
+	useEffect(() => {
+		const getName = async () => {
+			const data = (await database.localStorage.get("auth.profile")) as string;
+			if (data) {
+				const parse = JSON.parse(data) as IAuthProfile["data"];
+				setUserId(parse.id);
+				console.log("criado por", parse.id);
+			}
+		};
+		getName();
+	}, []);
 
 	const handleLoadFeed = async () => {
 		try {
@@ -51,6 +66,7 @@ function HomeViewModel() {
 	return {
 		isLoading,
 		posts,
+		userId,
 		handleLoadFeed,
 		handleLoadPosts,
 		createPost,

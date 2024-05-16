@@ -11,7 +11,7 @@ import Post from "../../components/Post";
 import HomeViewModel from "./view.model";
 
 function HomePage() {
-	const { handleLoadFeed, createPost, isLoading, posts } = HomeViewModel();
+	const { handleLoadFeed, createPost, isLoading, userId, posts } = HomeViewModel();
 	return (
 		<Container className="flex-1">
 			<HomeHeader />
@@ -22,7 +22,7 @@ function HomePage() {
 					<FlashList
 						refreshControl={<RefreshControl refreshing={isLoading} onRefresh={async () => await handleLoadFeed()} />}
 						renderItem={({ item }) => {
-							return <Post data={item} />;
+							return <Post data={item} userId={userId} />;
 						}}
 						getItemType={(item) => {
 							return item.uuid;

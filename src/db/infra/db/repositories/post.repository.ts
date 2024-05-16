@@ -56,6 +56,7 @@ export class PostRepository {
 					data.uuid = element.data.id || "";
 					data.created_at = Date.parse(element.data.createdAt as string);
 					data.updated_at = Date.parse(element.data.updatedAt as string);
+					data.created_by = element.profile.createdBy;
 					data.likes = element.data.likes || 0;
 					data.hasLike = element.data.hasLike || false;
 					data.media = element.data.media;
@@ -70,7 +71,7 @@ export class PostRepository {
 				await database.batch([...datas]);
 			});
 			return true;
-		} catch (error) {}
+		} catch {}
 		return false;
 	}
 
