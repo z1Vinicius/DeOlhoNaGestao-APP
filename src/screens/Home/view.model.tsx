@@ -7,22 +7,26 @@ import { IPostActionChooseRef } from "@components/PostActionSheet";
 
 function HomeViewModel() {
 	const [posts, setPosts] = useState<PostModel[]>([]);
-	const [isLoading, setLoading] = useState<boolean>(true);
+	const [isLoading, setLoading] = useState<boolean>(false);
 	const receiveEvent = useStore((state) => state.eventCounter);
 	const createPost = useRef<IPostActionChooseRef>(null);
 
 	const handleLoadFeed = async () => {
 		try {
-			const data = await PostFeedRepository.getRecentFeed();
-			const request = await api.post("api/posts/feed/update", data);
-			await PostRepository.loadManyPosts(request.data.data);
-			await PostFeedRepository.createOrUpdateBasedOnExistence(request.data);
-			await handleLoadPosts();
+			if (!isLoading) {
+				setLoading(true);
+				const data = await PostFeedRepository.getRecentFeed();
+				const request = await api.post("api/posts/feed/update", data);
+				await PostRepository.loadManyPosts(request.data.data);
+				await PostFeedRepository.createOrUpdateBasedOnExistence(request.data);
+				await handleLoadPosts();
+			}
 		} catch {
 			setTimeout(async () => {
 				await handleLoadFeed();
 			}, 5000);
 		} finally {
+			setLoading(false);
 		}
 	};
 
