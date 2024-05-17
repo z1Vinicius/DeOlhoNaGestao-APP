@@ -10,7 +10,7 @@ import { IAuthProfile } from "src/interfaces/auth";
 function HomeViewModel() {
 	const [posts, setPosts] = useState<PostModel[]>([]);
 	const [isLoading, setLoading] = useState<boolean>(false);
-	const [userId, setUserId] = useState("");
+	const [userId, setUserId] = useState();
 	const receiveEvent = useStore((state) => state.eventCounter);
 	const createPost = useRef<IPostActionChooseRef>(null);
 
@@ -36,9 +36,9 @@ function HomeViewModel() {
 				await handleLoadPosts();
 			}
 		} catch {
-			setTimeout(async () => {
-				await handleLoadFeed();
-			}, 5000);
+			// setTimeout(async () => {
+			// 	await handleLoadFeed();
+			// }, 5000);
 		} finally {
 			setLoading(false);
 		}

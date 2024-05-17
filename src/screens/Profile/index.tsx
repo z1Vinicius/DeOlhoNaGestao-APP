@@ -9,7 +9,7 @@ import ProfileViewModel from "./view.model";
 const Logo = Image.resolveAssetSource(AppLogo).uri;
 
 function ProfilePage() {
-	const { firstName, lastName, handleLogout } = ProfileViewModel();
+	const { firstName, lastName, isLoading, handleLogout } = ProfileViewModel();
 
 	return (
 		<Container className="flex-1">
@@ -29,18 +29,19 @@ function ProfilePage() {
 					</Container>
 				</Container>
 				<Container className="items-center gap-4">
-					<Button activeOpacity={0.9} className="w-5/6 h-10 bg-[#848687] rounded-xl justify-center items-center">
+					<Button disabled={true} activeOpacity={0.9} className="w-5/6 h-10 bg-[#848687] rounded-xl justify-center items-center">
 						<Text className=" text-slate-50 font-medium">Alterar Senha</Text>
 					</Button>
-					<Button activeOpacity={0.9} className="w-5/6  h-10 bg-[#848687] rounded-xl justify-center items-center">
+					<Button disabled={true} activeOpacity={0.9} className="w-5/6  h-10 bg-[#848687] rounded-xl justify-center items-center">
 						<Text className=" text-slate-50 font-medium">Alterar Cidade</Text>
 					</Button>
-					<Button activeOpacity={0.9} className="w-5/6  h-10 bg-[#848687] rounded-xl justify-center items-center">
+					<Button disabled={true} activeOpacity={0.9} className="w-5/6  h-10 bg-[#848687] rounded-xl justify-center items-center">
 						<Text className=" text-slate-50 font-medium">Deletar Conta</Text>
 					</Button>
 				</Container>
 				<Container className="flex-1 items-center  justify-end">
 					<Button
+						disabled={isLoading}
 						activeOpacity={0.9}
 						className="w-5/6  h-12 bg-[#27acde] rounded-full justify-center items-center"
 						onPress={async () => {

@@ -15,6 +15,19 @@ interface IAuthLogin {
 	data: IAuthSuccess | IResponseError;
 }
 
+interface IAuthRegister {
+	status: number;
+	data:
+		| {
+				email: string;
+				username: string;
+				password: string;
+				confirmPassword: string;
+				fullName: string;
+		  }
+		| IResponseError;
+}
+
 interface IAuthProfile {
 	status: number;
 	data:
@@ -34,4 +47,4 @@ interface IAuthProfile {
 		| IResponseError;
 }
 
-export { IAuthLogin, IAuthSuccess, IAuthProfile, ILogin };
+export { IAuthLogin, IAuthSuccess, IAuthRegister, IAuthProfile, ILogin };

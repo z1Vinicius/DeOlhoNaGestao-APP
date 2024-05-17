@@ -16,7 +16,7 @@ import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 
 function RegisterView() {
 	const navigator = useNavigation<NativeStackNavigationProp<AuthStackRoutes>>();
-	const { control, onSubmit, handleSubmit, showPassword, handleTogglePassword } = RegisterViewModel();
+	const { control, onSubmit, handleSubmit, showPassword, handleTogglePassword, loading } = RegisterViewModel();
 	const isKeyboardOpen = useKeyboardOpen();
 	const city = [
 		{
@@ -127,9 +127,9 @@ function RegisterView() {
 										/>
 										<Button activeOpacity={0.8} onPress={() => handleTogglePassword("password")}>
 											{showPassword.password ? (
-												<FontAwesome name={"eye-slash"} size={20} color={"#00aeed"} />
-											) : (
 												<FontAwesome name={"eye"} size={20} color={"#00aeed"} />
+											) : (
+												<FontAwesome name={"eye-slash"} size={20} color={"#00aeed"} />
 											)}
 										</Button>
 									</Container>
@@ -160,9 +160,9 @@ function RegisterView() {
 										/>
 										<Button activeOpacity={0.8} onPress={() => handleTogglePassword("confirmPassword")}>
 											{showPassword.confirmPassword ? (
-												<FontAwesome name={"eye-slash"} size={20} color={"#00aeed"} />
-											) : (
 												<FontAwesome name={"eye"} size={20} color={"#00aeed"} />
+											) : (
+												<FontAwesome name={"eye-slash"} size={20} color={"#00aeed"} />
 											)}
 										</Button>
 									</Container>
@@ -205,6 +205,7 @@ function RegisterView() {
 				<Container className="absolute bottom-0 bg-gray-200 h-12 w-full flex-row p-3 justify-center items-center space-x-2 mb-3 ">
 					<Text className="text-zinc-700 ">Já possuí uma conta?</Text>
 					<Button
+						disabled={loading}
 						activeOpacity={0.8}
 						onPress={() => {
 							navigator.replace("Login");
