@@ -18,6 +18,12 @@ function PostEdit({ createdBy, postId, userId }: IPostEdit) {
 	const [isLoading, setLoading] = useState(false);
 	const updateFeed = useStore((state) => state.emitEvent);
 
+	useEffect(() => {
+		console.log(createdBy, userId);
+
+		return () => {};
+	}, []);
+
 	const handleDelete = async () => {
 		try {
 			const id = postId.replaceAll("-", "");

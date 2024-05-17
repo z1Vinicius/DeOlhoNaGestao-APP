@@ -93,6 +93,7 @@ function NewPostActionSheet(props, ref) {
 				await PostRepository.createOrUpdateBasedOnExistence(postId, response.data as IPost);
 				updateFeed();
 				setShowActionsheet(false);
+				setImages([]);
 				reset();
 			} else {
 				Alert.alert("Erro ao fazer postagem");

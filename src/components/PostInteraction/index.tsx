@@ -58,8 +58,8 @@ function PostInteraction({ likes, hasLike, postId }: IPostInteraction) {
 			const request = await api[hasLike ? "delete" : "post"](endpoint);
 			if (request.status === 200) {
 				const responseData = request.data as IPost;
-				setHasLike(!hasLike);
-				setLikeCount(hasLike ? likeCount - 1 : likeCount + 1);
+				setHasLike(responseData.data.hasLike);
+				setLikeCount(responseData.data.likes);
 				await PostRepository.createOrUpdateBasedOnExistence(postId, responseData);
 				await updateFeed();
 			}

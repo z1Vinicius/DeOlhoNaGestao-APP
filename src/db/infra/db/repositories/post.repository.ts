@@ -81,6 +81,7 @@ export class PostRepository {
 			const [result] = await base.query(Q.where("uuid", postData.data.id || ""));
 			const queryUpdate = result.prepareUpdate((data) => {
 				data.updated_at = Date.parse(postData.data.updatedAt as string);
+				data.created_by = postData.profile.createdBy;
 				data.likes = postData.data.likes || 0;
 				data.hasLike = postData.data.hasLike || false;
 				data.media = postData.data.media;
@@ -102,6 +103,7 @@ export class PostRepository {
 			const post = base.prepareCreate((data) => {
 				data.uuid = postData.data.id || "";
 				data.created_at = Date.parse(postData.data.createdAt as string);
+				data.created_by = postData.profile.createdBy;
 				data.updated_at = Date.parse(postData.data.updatedAt as string);
 				data.likes = postData.data.likes || 0;
 				data.hasLike = postData.data.hasLike || false;
