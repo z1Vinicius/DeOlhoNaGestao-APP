@@ -1,7 +1,7 @@
 import axios from "axios";
 import database from "../db/infra/db/settings/connection";
 
-const url = "http://192.168.18.3:8000";
+const url = "http://192.168.18.22:8000";
 
 const api = axios.create({
 	timeout: 1500,
@@ -17,5 +17,5 @@ const setStorageToken = async () => {
 
 setStorageToken();
 
-export { url, setStorageToken };
+export { setStorageToken, url };
 export default api;

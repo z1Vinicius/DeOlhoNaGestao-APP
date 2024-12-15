@@ -18,7 +18,7 @@ export function nameToColor(nome: string, sobrenome: string): string {
 	}
 
 	const hashValue = simpleHash(nomeCompleto);
-	const color = `hsl(${hashValue % 360}, 70%, 80%)`;
+	const color = `hsl(${hashValue % 360}, 50%, 80%)`;
 
 	return color;
 }

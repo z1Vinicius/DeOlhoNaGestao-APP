@@ -1,16 +1,16 @@
-import React, { useState, useEffect, useImperativeHandle, forwardRef } from "react";
-import { Text, View, KeyboardAvoidingView, ScrollView, TouchableOpacity as Button, TextInput, Image, Alert } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import { useForm, Controller } from "react-hook-form";
 import { Actionsheet, ActionsheetBackdrop, ActionsheetContent, ActionsheetDragIndicator, ActionsheetDragIndicatorWrapper, FormControl, VStack } from "@gluestack-ui/themed";
 import * as ImagePicker from "expo-image-picker";
+import { ImagePickerSuccessResult } from "expo-image-picker";
+import React, { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { Alert, TouchableOpacity as Button, Image, KeyboardAvoidingView, ScrollView, Text, TextInput, View } from "react-native";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
-import api from "src/services/api";
-import { v4 as uuidv4 } from "uuid";
 import { PostRepository } from "src/db/infra/db/repositories/post.repository";
 import IPost from "src/interfaces/post";
+import api from "src/services/api";
 import useStore from "src/stores/feed";
-import { ImagePickerSuccessResult } from "expo-image-picker";
+import { v4 as uuidv4 } from "uuid";
 
 export interface IPostActionChooseRef {
 	handleOpen: () => void;
@@ -147,7 +147,7 @@ function NewPostActionSheet(props, ref) {
 										<View className="h-52 rounded-sm border-solid border-gray-500/30 border flex-row  p-2">
 											<TextInput
 												multiline={true}
-												placeholder="Digite aqui"
+												placeholder="Comece a informar...."
 												className="flex-1 text-zinc-900"
 												value={value}
 												onChangeText={(value) => {
@@ -171,10 +171,7 @@ function NewPostActionSheet(props, ref) {
 								{images.map((image, index) => (
 									<View className="relative m-2" key={Math.random().toString()}>
 										<Image key={index} source={{ uri: image }} className="w-32 h-32 rounded-md" />
-										<Button
-											onPress={() => removeImage(index)}
-											className="absolute top-1 right-1 bg-white rounded-full w-8 h-8 flex items-center justify-center"
-										>
+										<Button onPress={() => removeImage(index)} className="absolute top-1 right-1 bg-white rounded-full w-8 h-8 flex items-center justify-center">
 											<FontAwesome name="close" size={10} />
 										</Button>
 									</View>

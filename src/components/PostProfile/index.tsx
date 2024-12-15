@@ -1,6 +1,6 @@
-import { View as Container, TouchableOpacity as Button, Text } from "react-native";
 import { Avatar, AvatarFallbackText } from "@gluestack-ui/themed";
 import { useMemo } from "react";
+import { TouchableOpacity as Button, View as Container, Text } from "react-native";
 import { nameToColor } from "../../utils/functions";
 interface IPostProfile {
 	name: string;
@@ -18,12 +18,12 @@ function PostProfile({ name, lastName, profileImage, createdAt }: IPostProfile) 
 		<Container className="flex-row gap-2 p-2">
 			<Button activeOpacity={0.9}>
 				<Avatar style={{ backgroundColor: nameToColor(name, lastName), borderRadius: 100 }} size="md" borderRadius="$full">
-					<AvatarFallbackText>{fullName}</AvatarFallbackText>
+					<AvatarFallbackText color="$black">{fullName}</AvatarFallbackText>
 				</Avatar>
 			</Button>
 			<Container className="flex-col">
-				<Text className="text-lg text-gray-800 font-medium">{fullName}</Text>
-				<Text className="text-gray-800">{postDate}</Text>
+				<Text className="text-lg text-zinc-900 font-medium">{fullName}</Text>
+				<Text className="text-black">{postDate}</Text>
 			</Container>
 		</Container>
 	);

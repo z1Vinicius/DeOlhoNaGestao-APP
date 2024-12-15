@@ -1,16 +1,15 @@
-import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { Alert } from "react-native";
-import { RegisterValidationSchema } from "../../validators/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
-import AuthMapper from "src/mappers/auth.mapper";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import Toast from "react-native-toast-message";
 import AuthService from "src/api/auth.services";
+import database from "src/db/infra/db/settings/connection";
+import { IAuthSuccess } from "src/interfaces/auth";
+import AuthMapper from "src/mappers/auth.mapper";
+import { setStorageToken } from "src/services/api";
 import useStoreAuth from "src/stores/login";
 import { sleep } from "src/utils/functions";
-import Toast from "react-native-toast-message";
-import database from "src/db/infra/db/settings/connection";
-import { IAuthSuccess, IAuthRegister } from "src/interfaces/auth";
-import { setStorageToken } from "src/services/api";
+import { RegisterValidationSchema } from "../../validators/auth";
 
 function RegisterViewModel() {
 	const [loading, setLoading] = useState<boolean>(false);
@@ -27,11 +26,11 @@ function RegisterViewModel() {
 
 	const { control, handleSubmit } = useForm({
 		defaultValues: {
-			email: "carlos@gmail.com",
-			username: "carlossantana",
-			fullName: "Carlos Santana",
-			password: "12345678",
-			confirmPassword: "12345678",
+			email: "",
+			username: "",
+			fullName: "",
+			password: "",
+			confirmPassword: "",
 			city: "",
 		},
 		resolver: zodResolver(RegisterValidationSchema),

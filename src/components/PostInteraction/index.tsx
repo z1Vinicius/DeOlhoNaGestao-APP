@@ -1,12 +1,12 @@
-import { View as Container, Text, TouchableOpacity as Button } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import Animated, { useSharedValue, withTiming, Easing, useAnimatedStyle, withRepeat, withSequence } from "react-native-reanimated";
-import { useState, useEffect } from "react";
-import useStore from "src/stores/feed";
-import { sleep } from "src/utils/functions";
-import api from "src/services/api";
+import { useEffect, useState } from "react";
+import { TouchableOpacity as Button, View as Container, Text } from "react-native";
+import Animated, { Easing, useAnimatedStyle, useSharedValue, withRepeat, withSequence, withTiming } from "react-native-reanimated";
 import { PostRepository } from "src/db/infra/db/repositories/post.repository";
 import IPost from "src/interfaces/post";
+import api from "src/services/api";
+import useStore from "src/stores/feed";
+import { sleep } from "src/utils/functions";
 
 interface IPostInteraction {
 	likes: number;
@@ -78,7 +78,7 @@ function PostInteraction({ likes, hasLike, postId }: IPostInteraction) {
 
 	return (
 		<Container className="mt-3 flex-row justify-between">
-			<Container className="flex-row gap-2 items-center">
+			<Container className="flex-row gap-2 items-center  rounded-lg flex justify-center ">
 				<Button disabled={isLoading} onPress={handleLike}>
 					<Animated.View style={animatedStyle}>
 						<AntDesign name={"heart"} color={hasPostLike ? "#21ace1" : "#000"} size={20} />

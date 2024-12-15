@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import { TouchableOpacity as Button, View as Container, Image, FlatList } from "react-native";
-import { url } from "../../services/api";
 import { FlashList } from "@shopify/flash-list";
+import React, { useEffect } from "react";
+import { TouchableOpacity as Button, View as Container, Image } from "react-native";
+import { url } from "../../services/api";
 
 interface IPostMedia {
 	media: string[];
@@ -14,9 +14,9 @@ function PostMedia({ media }: IPostMedia) {
 
 	const MediaItem = ({ item }) => {
 		return (
-			<Container className="h-32 w-full">
+			<Container className="h-96 w-full">
 				<Button activeOpacity={0.9}>
-					<Image source={{ uri: url + item }} className="h-32 w-32 mr-2 rounded-xl" />
+					<Image source={{ uri: url + item }} className="h-full w-64 mr-2 rounded-xl" />
 				</Button>
 			</Container>
 		);

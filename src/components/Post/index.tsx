@@ -1,10 +1,10 @@
-import { View as Container, TouchableOpacity as Button, Text } from "react-native";
+import { View as Container } from "react-native";
 
-import PostInteraction from "../PostInteraction";
-import PostProfile from "../PostProfile";
 import PostEdit from "../PostEdit";
-import PostText from "../PostText";
+import PostInteraction from "../PostInteraction";
 import PostMedia from "../PostMedia";
+import PostProfile from "../PostProfile";
+import PostText from "../PostText";
 
 import { PostModel } from "src/db/infra/db/entities/entities";
 
@@ -15,7 +15,7 @@ interface IPost {
 
 function Post({ data, userId }: IPost) {
 	return (
-		<Container className="p-3 m-2 rounded-2xl bg-zinc-200">
+		<Container className="p-3 m-2 rounded-2xl bg-gray-300">
 			<Container className="flex-row gap-2 justify-between items-center">
 				<PostProfile name={data?.name} lastName={data.last_name} createdAt={new Date(data.created_at).toDateString()} profileImage={data.profile_image} />
 				<PostEdit createdBy={data.created_by} postId={data.uuid} userId={userId} />
