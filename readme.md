@@ -1,6 +1,5 @@
 # De Olho da Gestão (APP)
 
-Projeto de Extensão da Faculdade Cruzeir odo Sul com a temática **Tecnologia para Todos**.
 Projeto de um Aplicativo com foco na denúncias de má gestão públicas e privadas.
 
 ## 🚀 Começando
